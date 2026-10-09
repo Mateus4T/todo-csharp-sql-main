@@ -91,34 +91,35 @@ jobs:
           path: ./publish
         if: github.ref == 'refs/heads/main'
 
-#   frontend-build-and-test:
-#     if: false
-#     needs: versioning
-#     runs-on: ubuntu-latest
-#     defaults:
-#       run:
-#         working-directory: ./src/web
+  frontend-build-and-test:
+    if: false
+    needs: versioning
+    runs-on: ubuntu-latest
+    name: Frontend Build
+    defaults:
+      run:
+        working-directory: ./src/web
 
-#     steps:
-#       - uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-#       - uses: actions/setup-node@v4
-#         with:
-#           node-version: 20.x
-#           cache: npm
-#           cache-dependency-path: ./src/web
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+          cache-dependency-path: ./src/web
 
-#       - name: Build and Test
-#         run: |
-#           npm ci
-#           npm run lint
-#           npm run build
+      - name: Build and Test
+        run: |
+          npm ci
+          npm run lint
+          npm run build
 
-#       - uses: actions/upload-artifact@v4
-#         with:
-#           name: web
-#           path: ./src/web/dist
-#         if: github.ref == 'refs/heads/main'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: ./src/web/dist
+        if: github.ref == 'refs/heads/main'
 
 #   backend-lint:
 #     needs: versioning
