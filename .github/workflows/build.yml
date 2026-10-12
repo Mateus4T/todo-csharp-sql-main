@@ -142,18 +142,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #if: github.ref != 'refs/heads/main'
 
-#   dependency-review:
-#     needs: versioning
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
+  dependency-review:
+    needs: versioning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-#       - uses: actions/dependency-review-action@v4
-#         with:
-#           comment-summary-in-pr: always
-#           base-ref: main
-#           head-ref: main
-#     if: github.ref != 'refs/heads/main'
+      - uses: actions/dependency-review-action@v4
+        with:
+          comment-summary-in-pr: always
+          base-ref: main
+          head-ref: main
+    #if: github.ref != 'refs/heads/main'
 
 #   code-security-check:
 #     needs: versioning
