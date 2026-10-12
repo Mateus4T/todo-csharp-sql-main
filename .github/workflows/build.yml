@@ -121,26 +121,26 @@ jobs:
           path: ./src/web/dist
         if: github.ref == 'refs/heads/main'
 
-#   backend-lint:
-#     needs: versioning
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#         with:
-#           # super-linter needs the full git history to get the
-#           # list of files that changed across commits
-#           fetch-depth: 0
+  backend-lint:
+    needs: versioning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # super-linter needs the full git history to get the
+          # list of files that changed across commits
+          fetch-depth: 0
 
-#       - uses: github/super-linter@v6
-#         env:
-#           DEFAULT_BRANCH: "main"
-#           VALIDATE_ALL_CODEBASE: "false"
-#           VALIDATE_YAML: "true"
-#           VALIDATE_CSHARP: "true"
-#           VALIDATE_JAVASCRIPT_ES: "true"
-#           VALIDATE_TYPESCRIPT_ES: "true"
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#     if: github.ref != 'refs/heads/main'
+      - uses: github/super-linter@v6
+        env:
+          DEFAULT_BRANCH: "main"
+          VALIDATE_ALL_CODEBASE: "false"
+          VALIDATE_YAML: "true"
+          VALIDATE_CSHARP: "true"
+          VALIDATE_JAVASCRIPT_ES: "true"
+          VALIDATE_TYPESCRIPT_ES: "true"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    if: github.ref != 'refs/heads/main'
 
 #   dependency-review:
 #     needs: versioning
