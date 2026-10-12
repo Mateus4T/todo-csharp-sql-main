@@ -158,37 +158,37 @@ jobs:
           head-ref: main
     #if: github.ref != 'refs/heads/main'
 
-#   code-security-check:
-#     needs: versioning
-#     name: Analyze (${{ matrix.language }})
-#     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
-#     timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
-#     permissions:
-#       security-events: write
-#       packages: read
-#       actions: read
-#       contents: read
+  code-security-check:
+    needs: versioning
+    name: Analyze (${{ matrix.language }})
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
 
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         include:
-#           - language: csharp
-#             build-mode: none
-#           - language: javascript-typescript
-#             build-mode: none
-#     steps:
-#       - uses: actions/checkout@v4
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: csharp
+            build-mode: none
+          - language: javascript-typescript
+            build-mode: none
+    steps:
+      - uses: actions/checkout@v4
 
-#       - uses: github/codeql-action/init@v3
-#         with:
-#           languages: ${{ matrix.language }}
-#           build-mode: ${{ matrix.build-mode }}
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
 
-#       - uses: github/codeql-action/analyze@v3
-#         with:
-#           category: "/language:${{matrix.language}}"
-#     if: github.ref != 'refs/heads/main'
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
+#    if: github.ref != 'refs/heads/main'
 
 #   build-docker-image:
 #     if: false
