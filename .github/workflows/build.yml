@@ -206,11 +206,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ github.repository }}:${{ env.version }} .
+          docker build -t mateus4t/todo-csharp:${{ env.version }} .
 
       - name: Tag Docker image as Latest
         run: |
-          docker tag ${{ github.repository }}:${{ env.version }} ${{ github.repository }}:latest
+          docker tag mateus4t/todo-csharp:${{ env.version }} mateus4t/todo-csharp:latest
         if: github.ref == 'refs/heads/main'
 
       - uses: docker/login-action@v3
@@ -219,7 +219,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Run Docker push
-        run: docker push --all-tags ${{ github.repository }}
+        run: docker push --all-tags mateus4t/todo-csharp
 
 #   deploy:
 #     # needs: [versioning, build-docker-image]
